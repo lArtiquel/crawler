@@ -1,8 +1,9 @@
+package com.webcrawler.models;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**
@@ -10,7 +11,7 @@ import java.util.LinkedHashMap;
  */
 @RequiredArgsConstructor
 @Getter
-public class PageInfo {
+public class PageInfoModel {
 
     /** Link to the page **/
     @NonNull

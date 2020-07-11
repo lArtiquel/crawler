@@ -1,3 +1,6 @@
+package com.webcrawler.crawler;
+
+import com.webcrawler.models.PageInfoModel;
 import lombok.Getter;
 import lombok.Setter;
 import org.jsoup.Jsoup;
@@ -13,7 +16,7 @@ import java.util.*;
  * The {@code WebCrawler} class crawls thru the pages collecting links and counting number of term entries.
  * Then it goes by collected links and does the very same procedure until
  */
-public class WebCrawler {
+public class Crawler {
 
     /** Initialize {@code WebCrawler#MAX_DEPTH} and {@code WebCrawler#PAGE_LIMIT}
      * with values specified in settings prop file
@@ -22,7 +25,7 @@ public class WebCrawler {
     private static int PAGE_LIMIT;
     static {
         // init static vars
-        try(InputStream resourceAsStream = WebCrawler.class.getResourceAsStream("/settings.properties")) {
+        try(InputStream resourceAsStream = Crawler.class.getResourceAsStream("/settings.properties")) {
             final Properties properties = new Properties();
             properties.load(resourceAsStream);
             MAX_DEPTH = Integer.parseInt(properties.getProperty("crawl_depth"));
@@ -39,10 +42,10 @@ public class WebCrawler {
     /**
      * List of page infos.
      * {@code WebCrawler#crawl} method returns that list.
-     * @see PageInfo class for more.
+     * @see PageInfoModel class for more.
      */
     @Getter
-    private List<PageInfo> pageInfos;
+    private List<PageInfoModel> pageInfos;
 
     /**
      * List terms to search on each page.
@@ -55,7 +58,7 @@ public class WebCrawler {
      * @param url URL to start crawling from.
      * @return List of pageInfos.
      */
-    public List<PageInfo> crawl (String url) {
+    public List<PageInfoModel> crawl (String url) {
         resetState();
         crawl(url, 0);
         System.out.println("Link Set size: " + pageInfos.size());
@@ -78,7 +81,7 @@ public class WebCrawler {
             System.out.println("URL: " + url);
 
             // add current url to Set to avoid url parsing duplication
-            final PageInfo pageInfo = new PageInfo(url);
+            final PageInfoModel pageInfo = new PageInfoModel(url);
 
             try{
                 // fetch the HTML doc
@@ -115,7 +118,7 @@ public class WebCrawler {
      * @return True if such url crawled, else - false.
      */
     private boolean isUrlAlreadyCrawled(final String url) {
-        for (PageInfo pageInfo: pageInfos) {
+        for (PageInfoModel pageInfo: pageInfos) {
             if(pageInfo.getUrl().equals(url)) return true;
         }
         return false;

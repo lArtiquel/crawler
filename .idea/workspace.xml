@@ -2,10 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7acc6506-4524-4fdd-8db7-9abd86a10153" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Crawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WebCrawler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webcrawler/WebCrawlerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PageInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webcrawler/models/PageInfoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/WebCrawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webcrawler/crawler/Crawler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PageInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/WebCrawler.class" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,8 +31,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1eSKgG1c9Zh9Zr8kZ8uugeHxcmy" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -45,30 +59,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Crawler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Crawler" />
+  <component name="RunManager" selected="Spring Boot.WebCrawlerApplication">
+    <configuration name="WebCrawlerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.webcrawler.WebCrawlerApplication" />
       <module name="WebCrawler" />
-      <extension name="coverage" track_test_folders="true" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+    <configuration name="WebCrawlerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="WebCrawler" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.webcrawler.WebCrawlerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Crawler" />
-      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.WebCrawlerApplication" />
+      <item itemvalue="Spring Boot.WebCrawlerApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Crawler" />
+        <item itemvalue="Application.WebCrawlerApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -84,6 +96,7 @@
       <updated>1594309663527</updated>
       <workItem from="1594309667543" duration="10176000" />
       <workItem from="1594386278147" duration="12842000" />
+      <workItem from="1594443615491" duration="9098000" />
     </task>
     <servers />
   </component>
