@@ -15,6 +15,8 @@ public class WebCrawlerController {
     @GetMapping("/crawl")
     List<PageInfoModel> crawl(@RequestBody CrawlRequestModel req){
         Crawler crawler = new Crawler();
+        crawler.setPageLimit(req.getLimit());
+        crawler.setMaxDepth(req.getDepth());
         crawler.setTerms(req.getTerms());
         return crawler.crawl(req.getUrl());
     }

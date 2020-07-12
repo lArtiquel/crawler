@@ -21,23 +21,25 @@ public class Crawler {
     /** Initialize {@code WebCrawler#MAX_DEPTH} and {@code WebCrawler#PAGE_LIMIT}
      * with values specified in settings prop file
      * */
-    private static int MAX_DEPTH;
-    private static int PAGE_LIMIT;
-    static {
-        // init static vars
-        try(InputStream resourceAsStream = Crawler.class.getResourceAsStream("/settings.properties")) {
-            final Properties properties = new Properties();
-            properties.load(resourceAsStream);
-            MAX_DEPTH = Integer.parseInt(properties.getProperty("crawl_depth"));
-            PAGE_LIMIT = Integer.parseInt(properties.getProperty("crawl_limit"));
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
-            MAX_DEPTH = 8;
-            PAGE_LIMIT = 10000;
-        }
-    }
+    @Getter @Setter
+    private int pageLimit;
+    @Getter @Setter
+    private int maxDepth;
+//    static {
+//        // init static vars
+//        try(InputStream resourceAsStream = Crawler.class.getResourceAsStream("/settings.properties")) {
+//            final Properties properties = new Properties();
+//            properties.load(resourceAsStream);
+//            MAX_DEPTH = Integer.parseInt(properties.getProperty("crawl_depth"));
+//            PAGE_LIMIT = Integer.parseInt(properties.getProperty("crawl_limit"));
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        } catch (NumberFormatException e) {
+//            System.out.println(e.getMessage());
+//            MAX_DEPTH = 8;
+//            PAGE_LIMIT = 10000;
+//        }
+//    }
 
     /**
      * List of page infos.
@@ -48,7 +50,7 @@ public class Crawler {
     private List<PageInfoModel> pageInfos;
 
     /**
-     * List terms to search on each page.
+     * List of terms to search on each page.
      */
     @Getter @Setter
     private List<String> terms;
@@ -62,7 +64,7 @@ public class Crawler {
         resetState();
         crawl(url, 0);
         System.out.println("Link Set size: " + pageInfos.size());
-        System.out.println(pageInfos.get(0).getTermEntriesMap());
+        System.out.println(pageInfos.get(0).getTermsToEntries());
         return pageInfos;
     }
 
@@ -72,7 +74,7 @@ public class Crawler {
      * @param depth Depth from current url to initial url.
      */
     private void crawl (final String url, final int depth) {
-        if ((!isUrlAlreadyCrawled(url) && (depth < MAX_DEPTH) && (pageInfos.size() < PAGE_LIMIT))) {
+        if ((!isUrlAlreadyCrawled(url) && (depth < maxDepth) && (pageInfos.size() < pageLimit))) {
 
             // print scanned link info
             for(int i=0; i <= depth; i++) {
@@ -80,19 +82,19 @@ public class Crawler {
             }
             System.out.println("URL: " + url);
 
-            // add current url to Set to avoid url parsing duplication
-            final PageInfoModel pageInfo = new PageInfoModel(url);
-
-            try{
-                // fetch the HTML doc
+            try {
+                // connect and fetch the HTML doc
                 Document document = Jsoup.connect(url).get();
+
+                // create PageInfo model for valid link
+                final PageInfoModel pageInfo = new PageInfoModel(url, false);
 
                 // loop thru all terms
                 for(String term: terms){
                     // find all term entries in all html tags
                     int numberOfTermEntries = document.select("*:contains(" + term + ")").size();
                     // push that info into specified pageInfo struct
-                    pageInfo.getTermEntriesMap().put(term, numberOfTermEntries);
+                    pageInfo.getTermsToEntries().put(term, numberOfTermEntries);
                 }
 
                 // push page info to the list of page infos
@@ -106,8 +108,10 @@ public class Crawler {
                     crawl(page.attr("abs:href"), depth + 1);
                 }
             } catch (IOException e) {
-                // for now just ignore dead links
                 System.out.println(e.getMessage());
+                // save link into map, but mark that it is bad
+                final PageInfoModel pageInfo = new PageInfoModel(url, true);
+                pageInfos.add(pageInfo);
             }
         }
     }
