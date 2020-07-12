@@ -5,7 +5,7 @@ const Theme = responsiveFontSizes(
     palette: {
       type: 'dark',
       primary: { main: '#9c27b0' },
-      secondary: { main: '#f50057' }
+      secondary: { main: '#2732b0' }
     },
     spreddable: {}
   })
