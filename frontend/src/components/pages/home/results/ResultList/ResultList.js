@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { List, ListSubheader, makeStyles } from '@material-ui/core'
 import LinkListItem from './LinkListItem'
 
@@ -10,34 +11,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function ResultList() {
+const ResultList = ({ data }) => {
   const styles = useStyles()
-
-  const fakeData = [
-    {
-      url: 'https://google.com',
-      isBad: false,
-      termEntriesMap: {
-        react: 8,
-        redux: 5,
-        lArtiquel: 228
-      }
-    },
-    {
-      url: 'https://goofy.com',
-      isBad: true,
-      termEntriesMap: {}
-    },
-    {
-      url: 'https://oracle.com',
-      isBad: false,
-      termEntriesMap: {
-        Java: 15,
-        Collections: 5,
-        lArtiquel: 15
-      }
-    }
-  ]
 
   return (
     <List
@@ -50,13 +25,13 @@ export default function ResultList() {
       }
       className={styles.root}
     >
-      {fakeData.map((item) => {
+      {data.map((item) => {
         return (
           <React.Fragment key={item.url}>
             <LinkListItem
               url={item.url}
-              isBadLink={item.isBad}
-              termEntriesObj={item.termEntriesMap}
+              isBadURL={item.isBad}
+              termsToEntries={item.termsToEntries}
             />
           </React.Fragment>
         )
@@ -64,3 +39,11 @@ export default function ResultList() {
     </List>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    data: state.home.response
+  }
+}
+
+export default connect(mapStateToProps)(ResultList)

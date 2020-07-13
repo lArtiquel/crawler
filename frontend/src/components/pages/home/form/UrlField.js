@@ -3,7 +3,7 @@ import { TextField, Box, InputAdornment } from '@material-ui/core'
 import HttpOutlinedIcon from '@material-ui/icons/HttpOutlined'
 import { Field } from 'formik'
 
-const UrlField = ({ error, touched }) => {
+const UrlField = ({ error, touched, onChange }) => {
   return (
     <Box my={2}>
       <Field

@@ -38,12 +38,14 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-export default function LinkListItem({ url, isBadLink, termEntriesObj }) {
+export default function LinkListItem({ url, isBadURL, termsToEntries }) {
   const [isOpen, setOpen] = useState(false)
   // contains an array of a given object's own enumerable string-keyed property [key, value] pairs
-  const [termEntriesArray, setTermEntriesArray] = useState(Object.entries({}))
+  const [termsToEntriesArray, setTermsToEntriesArray] = useState(
+    Object.entries({})
+  )
   // flag indicates if `termEntriesObj` is empty or not
-  const [isTermsObjEmpty, setTermsObjEmpty] = useState(true)
+  const [isTermsToEntriesEmpty, setTermsToEntriesEmpty] = useState(true)
   const styles = useStyles()
 
   const handleClick = () => {
@@ -51,42 +53,45 @@ export default function LinkListItem({ url, isBadLink, termEntriesObj }) {
   }
 
   useEffect(() => {
-    // check if `termEntriesObj` is the type of Object
-    if (termEntriesObj.constructor === Object) {
+    // check if `termsToEntries` is the type of Object
+    if (termsToEntries.constructor === Object) {
       // use ES7 feature to convert obj to array of enum properties
-      setTermEntriesArray(Object.entries(termEntriesObj))
+      setTermsToEntriesArray(Object.entries(termsToEntries))
       // check if obj is empty
-      if (termEntriesArray.length !== 0) {
-        setTermsObjEmpty(false)
+      if (termsToEntriesArray.length !== 0) {
+        setTermsToEntriesEmpty(false)
       } else {
-        setTermsObjEmpty(true)
+        setTermsToEntriesEmpty(true)
       }
     } else {
-      // here if passed `termEntriesObj` is not an object
-      setTermsObjEmpty(true)
-      setTermEntriesArray(Object.entries({}))
+      // here if passed `termsToEntries` is not an object
+      setTermsToEntriesEmpty(true)
+      setTermsToEntriesArray(Object.entries({}))
     }
     // eslint-disable-next-line
-  }, [termEntriesObj, termEntriesArray.length])
+  }, [termsToEntries, termsToEntriesArray.length])
 
   return (
     <>
-      <ListItem button onClick={!isTermsObjEmpty ? handleClick : () => {}}>
+      <ListItem
+        button
+        onClick={!isTermsToEntriesEmpty ? handleClick : () => {}}
+      >
         <ListItemIcon>
-          {isBadLink ? (
+          {isBadURL ? (
             <BadLinkIcon className={styles.red} />
           ) : (
             <GoodLinkIcon className={styles.green} />
           )}
         </ListItemIcon>
-        <ListItemText secondary={url} className={styles.white} />
-        {!isTermsObjEmpty && (
+        <ListItemText secondary={url} />
+        {!isTermsToEntriesEmpty && (
           <ExpandIcon open={isOpen} className={styles.white} />
         )}
       </ListItem>
-      {!isTermsObjEmpty && (
+      {!isTermsToEntriesEmpty && (
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
-          <TermList termEntriesArray={termEntriesArray} />
+          <TermList termsToEntriesArray={termsToEntriesArray} />
         </Collapse>
       )}
     </>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Formik, Form as FormikForm } from 'formik'
 import * as Yup from 'yup'
 import UrlField from './UrlField'
@@ -6,22 +7,28 @@ import SettingsLayout from './SettingsLayout'
 import TagPicker from './TagPicker'
 import Header from './Header'
 import SubmitButton from './SubmitButton'
+import {
+  CrawlAction,
+  ChangeFormFieldAction
+} from '../../../../store/actions/homeActions'
 
-export default function Form() {
+const Form = ({ formData, crawl, changeFormField }) => {
+  const handleFormFieldChange = (e) => {
+    changeFormField(e.target.name, e.target.value)
+  }
+
   return (
     <Formik
       initialValues={{
-        url: '',
-        limit: 10,
-        depth: 3,
-        terms: []
+        url: formData.url,
+        limit: formData.limit,
+        depth: formData.depth
       }}
       onSubmit={(values, actions) => {
-        // // on success it'll automatically close dialog and clear error state, else it'll keep dialog opened with error
-        // signUp(values)
-        // // clear `errorness` fields
-        // actions.setFieldValue('password', '')
-        // actions.setTouched({ password: false })
+        // `untouch` form fields
+        actions.setTouched({ url: false, limit: false, depth: false })
+        // call crawl action and make request to the backend
+        crawl()
       }}
       validationSchema={Yup.object().shape({
         url: Yup.string()
@@ -42,7 +49,7 @@ export default function Form() {
       validateOnBlur
     >
       {({ errors, touched }) => (
-        <FormikForm>
+        <FormikForm onChange={handleFormFieldChange}>
           <Header />
           <UrlField error={errors.url} touched={touched.url} />
           <SettingsLayout errors={errors} touched={touched} />
@@ -53,3 +60,19 @@ export default function Form() {
     </Formik>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    formData: state.home.request
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    crawl: () => dispatch(CrawlAction()),
+    changeFormField: (name, value) =>
+      dispatch(ChangeFormFieldAction(name, value))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form)
