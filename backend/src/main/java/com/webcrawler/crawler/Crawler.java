@@ -68,6 +68,7 @@ public class Crawler {
 
     /**
      * Private method for recursion crawling.
+     * It crawls the page collecting links and counting term entries on the page.
      * @param url   URL to start crawling from.
      * @param depth Depth from current url to initial url.
      */
@@ -87,11 +88,18 @@ public class Crawler {
                 // create PageInfo model for valid link
                 final PageInfoModel pageInfo = new PageInfoModel(url, false);
 
-                // loop thru all terms
+                // select body el (all visible text on the page should be there)
+                final Element body = document.select("body").first();
+                // valid page should contain body tag
+                if(body == null) throw new IOException("Valid page should contain body tag!");
+                // retrieve plain text from element obj and lowercase it to make search case insensitive
+                final String lowercaseBodyText = body.text().toLowerCase();
+
+                // loop thru all of the terms
                 for(String term: terms){
-                    // find all term entries in all html tags
-                    int numberOfTermEntries = document.select("*:contains(" + term + ")").size();
-                    // push that info into specified pageInfo struct
+                    // get number of term entries in the body tag
+                    int numberOfTermEntries = countNumberOfWordEntries(lowercaseBodyText, term.toLowerCase());
+                    // put number of term entries to the termsToEntries map
                     pageInfo.getTermsToEntries().put(term, numberOfTermEntries);
                 }
 
@@ -116,7 +124,7 @@ public class Crawler {
 
     /**
      * Checks if such url already had been crawled or in the queue to be crawled.
-     * @param url
+     * @param url URL
      * @return True if such url crawled, else - false.
      */
     private boolean isUrlAlreadyCrawled(final String url) {
@@ -133,4 +141,20 @@ public class Crawler {
         pageInfos = new LinkedList<>();
     }
 
+    /**
+     * Method goes by {@code #text} and counts number of {@code #word} entries.
+     * @param text Where to look for {@code #word}.
+     * @param word Word to look for.
+     * @return Number of {@code #word} entries in the {@code #text}.
+     */
+    private static int countNumberOfWordEntries(final String text, final String word) {
+        int count = 0, fromIndex = 0;
+
+        while ((fromIndex = text.indexOf(word, fromIndex)) != -1 ){
+            count++;
+            fromIndex++;
+        }
+
+        return count;
+    }
 }
