@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-export default function LinkListItem({ url, isBadURL, termsToEntries }) {
+export default function LinkListItem({ url, badUrl, termsToEntries }) {
   const [isOpen, setOpen] = useState(false)
   // contains an array of a given object's own enumerable string-keyed property [key, value] pairs
   const [termsToEntriesArray, setTermsToEntriesArray] = useState(
@@ -78,13 +78,24 @@ export default function LinkListItem({ url, isBadURL, termsToEntries }) {
         onClick={!isTermsToEntriesEmpty ? handleClick : () => {}}
       >
         <ListItemIcon>
-          {isBadURL ? (
+          {badUrl ? (
             <BadLinkIcon className={styles.red} />
           ) : (
             <GoodLinkIcon className={styles.green} />
           )}
         </ListItemIcon>
-        <ListItemText secondary={url} />
+        <ListItemText
+          secondary={
+            <a
+              href={url}
+              className={styles.white}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {url}
+            </a>
+          }
+        />
         {!isTermsToEntriesEmpty && (
           <ExpandIcon open={isOpen} className={styles.white} />
         )}

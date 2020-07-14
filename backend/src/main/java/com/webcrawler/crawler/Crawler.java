@@ -63,8 +63,6 @@ public class Crawler {
     public List<PageInfoModel> crawl (String url) {
         resetState();
         crawl(url, 0);
-        System.out.println("Link Set size: " + pageInfos.size());
-        System.out.println(pageInfos.get(0).getTermsToEntries());
         return pageInfos;
     }
 

@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.LinkedHashMap;
 
 /**
- * The {@code PageInfo} class represents information about page located at {@code PageInfo#url}.
+ * The {@code PageInfo} class represents crawling information about page located at {@code PageInfo#url}.
  */
 @RequiredArgsConstructor
 @Getter
@@ -17,9 +17,9 @@ public class PageInfoModel {
     @NonNull
     private String url;
 
-    /** Indicates that URL is dead/bad **/
+    /** Indicates that URL is bad(dead) **/
     @NonNull
-    private boolean isBad;
+    private boolean isBadUrl;
 
     /**
      * Map represents terms in insertion order.

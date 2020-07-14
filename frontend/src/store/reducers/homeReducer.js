@@ -10,31 +10,7 @@ const initState = {
     terms: []
   },
   error: '',
-  response: [
-    {
-      url: 'https://google.com',
-      isBad: false,
-      termsToEntries: {
-        react: 8,
-        redux: 5,
-        lArtiquel: 228
-      }
-    },
-    {
-      url: 'https://goofy.com',
-      isBad: true,
-      termsToEntries: {}
-    },
-    {
-      url: 'https://oracle.com',
-      isBad: false,
-      termsToEntries: {
-        Java: 15,
-        Collections: 5,
-        lArtiquel: 15
-      }
-    }
-  ]
+  response: []
 }
 
 export default function HomeReducer(state = initState, action) {

@@ -5,6 +5,7 @@ import LinkListItem from './LinkListItem'
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    overflowX: 'auto',
     width: '100%',
     maxHeight: 600,
     backgroundColor: theme.palette.background.paper
@@ -19,7 +20,11 @@ const ResultList = ({ data }) => {
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
-        <ListSubheader component="div" id="nested-list-subheader">
+        <ListSubheader
+          component="div"
+          id="nested-list-subheader"
+          color="primary"
+        >
           Crawling results:
         </ListSubheader>
       }
@@ -30,7 +35,7 @@ const ResultList = ({ data }) => {
           <React.Fragment key={item.url}>
             <LinkListItem
               url={item.url}
-              isBadURL={item.isBad}
+              badUrl={item.badUrl}
               termsToEntries={item.termsToEntries}
             />
           </React.Fragment>

@@ -8,22 +8,26 @@ export const CrawlAction = () => {
     // change Frame to PROCESSING
     dispatch({ type: HomeActions.SET_PROCESSING_FRAME })
 
-    axios.get('http://localhost:8080/api/crawl', state.home.request).then(
-      (response) => {
+    axios({
+      url: 'http://localhost:8080/api/crawlUrl',
+      // i'm having some troubles sending req data in params
+      method: 'post',
+      data: state.home.request
+    })
+      .then((response) => {
         // clean Form for next Request
         dispatch({ type: HomeActions.CLEAR_FORM })
         // set response data
-        dispatch({ type: HomeActions.CRAWL, payload: response })
+        dispatch({ type: HomeActions.CRAWL, payload: response.data })
         // change frame to RESULTS
         dispatch({ type: HomeActions.SET_RESULTS_FRAME })
-      },
-      (error) => {
+      })
+      .catch((error) => {
         // set back FORM frame
         dispatch({ type: HomeActions.SET_FORM_FRAME })
         // set request error
         dispatch({ type: HomeActions.SET_RESPONSE_ERROR })
-      }
-    )
+      })
   }
 }
 
