@@ -9,7 +9,7 @@ export const CrawlAction = () => {
     dispatch({ type: HomeActions.SET_PROCESSING_FRAME })
 
     axios({
-      url: 'http://localhost:8080/api/crawlUrl',
+      url: 'https://srawler.herokuapp.com/api/crawlUrl',
       // i'm having some troubles sending req data in params
       method: 'post',
       data: state.home.request
