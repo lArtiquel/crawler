@@ -106,8 +106,10 @@ public class Crawler {
                 // push page info to the list of page infos
                 pageInfos.add(pageInfo);
 
-                // parse the HTML to extract links on that html page
-                Elements linksOnPage = document.select("a[href]");
+                // ignore anchor links
+                final String regexPattern = "^(?!#).+$";
+                // parse the HTML to extract links on that html page ^(?!#).+$
+                Elements linksOnPage = document.select("a[href~=" + regexPattern + "]");
 
                 // crawl thru all extracted links
                 for (Element page : linksOnPage) {

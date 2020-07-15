@@ -5,6 +5,7 @@ import com.webcrawler.models.CrawlRequestModel;
 import com.webcrawler.models.PageInfoModel;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,5 +32,13 @@ public class WebCrawlerController {
         crawler.setTerms(req.getTerms());
         return crawler.crawl(req.getUrl());
     }
+
+//    public static void main(String[] args) {
+//        Crawler crawler = new Crawler();
+//        crawler.setPageLimit(10);
+//        crawler.setMaxDepth(3);
+//        crawler.setTerms(Arrays.asList("Elon", "Musk"));
+//        crawler.crawl("https://en.wikipedia.org/wiki/Elon_Musk");
+//    }
 
 }
