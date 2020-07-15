@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/crawler/static/css/main.4013d035.chunk.css",
+    "main.js": "/crawler/static/js/main.cfe22ba1.chunk.js",
+    "main.js.map": "/crawler/static/js/main.cfe22ba1.chunk.js.map",
+    "runtime-main.js": "/crawler/static/js/runtime-main.4ba32193.js",
+    "runtime-main.js.map": "/crawler/static/js/runtime-main.4ba32193.js.map",
+    "static/js/2.37e66418.chunk.js": "/crawler/static/js/2.37e66418.chunk.js",
+    "static/js/2.37e66418.chunk.js.map": "/crawler/static/js/2.37e66418.chunk.js.map",
+    "index.html": "/crawler/index.html",
+    "precache-manifest.0e60ac404070cee583f393c4150b3bd1.js": "/crawler/precache-manifest.0e60ac404070cee583f393c4150b3bd1.js",
+    "service-worker.js": "/crawler/service-worker.js",
+    "static/css/main.4013d035.chunk.css.map": "/crawler/static/css/main.4013d035.chunk.css.map",
+    "static/js/2.37e66418.chunk.js.LICENSE.txt": "/crawler/static/js/2.37e66418.chunk.js.LICENSE.txt",
+    "static/media/cool-spider.png": "/crawler/static/media/cool-spider.db883515.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4ba32193.js",
+    "static/js/2.37e66418.chunk.js",
+    "static/css/main.4013d035.chunk.css",
+    "static/js/main.cfe22ba1.chunk.js"
+  ]
+}
