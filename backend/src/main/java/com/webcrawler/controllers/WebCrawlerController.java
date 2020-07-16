@@ -18,7 +18,7 @@ import java.util.List;
 public class WebCrawlerController {
 
     /**
-     * Method is the REST Controller's mapping on '/crawlUrl'.
+     * Method is the REST Controller's mapping to '/crawlUrl' url route.
      * It starts the {@code Crawler} with provided parameters.
      * and returns crawling results.
      * @param req Json object provided by client with crawling settings.

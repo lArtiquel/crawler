@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/api/**").permitAll()
+                    .antMatchers("/api/**", "/", "/welcome").permitAll()
                     .anyRequest().authenticated();
         // disable csrf tokens cause our api completely stateless
         // and available for everyone in the Internet (cors enabled to all origins, see WebCrawlerController class)
